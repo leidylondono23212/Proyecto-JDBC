@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario Profesor</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+<h1 th:text="${profesor.idProfesor == null ? 'Nuevo Profesor' : 'Editar Profesor'}"></h1>
+<form th:action="@{/profesores}" th:object="${profesor}" method="post">
+    <input type="hidden" th:field="*{idProfesor}">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" th:field="*{nombre}"><br>
+    <label for="apellido">Apellido:</label>
+    <input type="text" id="apellido" th:field="*{apellido}"><br>
+    <label for="especialidad">Especialidad:</label>
+    <input type="text" id="especialidad" th:field="*{especialidad}"><br>
+    <label for="certificaciones">Certificaciones:</label>
+    <input type="text" id="certificaciones" th:field="*{certificaciones}"><br>
+    <label for="correoElectronico">Correo Electrónico:</label>
+    <input type="text" id="correoElectronico" th:field="*{correoElectronico}"><br>
+    <button type="submit">Guardar</button>
+</form>
+<a th:href="@{/profesores}">Cancelar</a>
+</body>
+</html>

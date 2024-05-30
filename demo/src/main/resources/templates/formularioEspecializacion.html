@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario Especialización</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+<h1 th:text="${especializacion.idEspecializacion == null ? 'Nueva Especialización' : 'Editar Especialización'}"></h1>
+<form th:action="@{/especializaciones}" th:object="${especializacion}" method="post">
+    <input type="hidden" th:field="*{idEspecializacion}">
+    <label for="nombreEspecializacion">Nombre Especialización:</label>
+    <input type="text" id="nombreEspecializacion" th:field="*{nombreEspecializacion}"><br>
+    <label for="nivelEspecializacion">Nivel Especialización:</label>
+    <input type="text" id="nivelEspecializacion" th:field="*{nivelEspecializacion}"><br>
+    <label for="institucion">Institución:</label>
+    <input type="text" id="institucion" th:field="*{institucion}"><br>
+    <label for="idProfesor">Profesor:</label>
+    <select id="idProfesor" th:field="*{idProfesor}">
+        <option th:each="profesor : ${profesores}" th:value="${profesor.idProfesor}" th:text="${profesor.nombre}"></option>
+    </select><br>
+    <button type="submit">Guardar</button>
+</form>
+<a th:href="@{/especializaciones}">Cancelar</a>
+</body>
+</html>

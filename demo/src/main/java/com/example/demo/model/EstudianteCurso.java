@@ -9,7 +9,6 @@ import org.springframework.data.relational.core.mapping.Table;
 public class EstudianteCurso {
     @Id
     private Integer idEstudianteCurso;
-
     private Integer idEstudiante;
     private Integer idCurso;
 }

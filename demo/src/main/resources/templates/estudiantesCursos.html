@@ -17,9 +17,9 @@
     </tr>
     <tr th:each="estudianteCurso : ${estudiantesCursos}">
         <td th:text="${estudianteCurso.idEstudiante}"></td>
-        <td th:text="${estudianteCurso.estudiante.nombre}"></td>
+        <td th:text="${estudianteCurso.estudiante != null ? estudianteCurso.estudiante.nombre : 'Desconocido'}"></td>
         <td th:text="${estudianteCurso.idCurso}"></td>
-        <td th:text="${estudianteCurso.curso.nombreCurso}"></td>
+        <td th:text="${estudianteCurso.curso != null ? estudianteCurso.curso.nombreCurso : 'Desconocido'}"></td>
         <td>
             <a th:href="@{|/estudiantes_cursos/editar/${estudianteCurso.idEstudianteCurso}|}">Editar</a>
             <a th:href="@{|/estudiantes_cursos/eliminar/${estudianteCurso.idEstudianteCurso}|}">Eliminar</a>

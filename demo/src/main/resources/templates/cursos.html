@@ -25,7 +25,7 @@
         <td th:text="${curso.nivel}"></td>
         <td th:text="${curso.duracion}"></td>
         <td th:text="${curso.horario}"></td>
-        <td th:text="${curso.profesor.nombre}"></td>
+        <td th:text="${curso.profesor != null ? curso.profesor.nombre : 'Sin profesor'}"></td>
         <td>
             <a th:href="@{|/cursos/editar/${curso.idCurso}|}">Editar</a>
             <a th:href="@{|/cursos/eliminar/${curso.idCurso}|}">Eliminar</a>

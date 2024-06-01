@@ -21,7 +21,7 @@
         <td th:text="${especializacion.nombreEspecializacion}"></td>
         <td th:text="${especializacion.nivelEspecializacion}"></td>
         <td th:text="${especializacion.institucion}"></td>
-        <td th:text="${especializacion.profesor.nombre}"></td>
+        <td th:text="${especializacion.profesor != null ? especializacion.profesor.nombre : 'Sin profesor'}"></td>
         <td>
             <a th:href="@{|/especializaciones/editar/${especializacion.idEspecializacion}|}">Editar</a>
             <a th:href="@{|/especializaciones/eliminar/${especializacion.idEspecializacion}|}">Eliminar</a>

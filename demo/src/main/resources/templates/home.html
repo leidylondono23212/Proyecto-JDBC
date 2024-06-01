@@ -1,27 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Academia</title>
+    <title>Inicio</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
-    <style>
-
-    </style>
 </head>
 <body>
-<div class="container">
-    <h1>Proyecto</h1>
-    <div class="nav">
-        <a href="/profesores">
-            <input type="button" value="Profesores" />
-        </a>
-        <a href="/cursos">
-            <input type="button" value="Cursos" />
-        </a>
-        <a href="/estudiantes">
-            <input type="button" value="Estudiantes" />
-        </a>
-    </div>
-</div>
+<h1>Bienvenido a la Aplicación de Gestión de Cursos</h1>
+<a th:href="@{/cursos}">Ver Cursos</a>
+<a th:href="@{/especializaciones}">Ver Especializaciones</a>
+<a th:href="@{/estudiantes}">Ver Estudiantes</a>
+<a th:href="@{/profesores}">Ver Profesores</a>
+<a th:href="@{/estudiantes_cursos}">Ver Estudiantes en Cursos</a>
 </body>
 </html>

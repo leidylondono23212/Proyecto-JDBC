@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Curso;
 import com.example.demo.model.Profesor;
 import com.example.demo.repository.ProfesorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class ProfesorController {
     @GetMapping("/nuevo")
     public String nuevoProfesor(Model model) {
         model.addAttribute("profesor", new Profesor());
+        model.addAttribute("curso", new Curso());
+        model.addAttribute("profesores", profesorRepository.findAll());
         return "formularioProfesor";
     }
 
@@ -34,6 +37,7 @@ public class ProfesorController {
 
     @GetMapping("/editar/{id}")
     public String editarProfesor(@PathVariable Integer id, Model model) {
+        model.addAttribute("curso", new Curso());
         Profesor profesor = profesorRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("ID inválido:" + id));
         model.addAttribute("profesor", profesor);
         return "formularioProfesor";

@@ -20,6 +20,27 @@
     <input type="text" id="correoElectronico" th:field="*{correoElectronico}"><br>
     <button type="submit">Guardar</button>
 </form>
-<a th:href="@{/profesores}">Cancelar</a>
+
+
+<h1 th:text="${curso.idCurso == null ? 'Nuevo Curso' : 'Editar Curso'}"></h1>
+<form th:action="@{/cursos}" th:object="${curso}" method="post">
+    <input type="hidden" th:field="*{idCurso}">
+    <label for="nombreCurso">Nombre Curso:</label>
+    <input type="text" id="nombreCurso" th:field="*{nombreCurso}"><br>
+    <label for="descripcion">Descripción:</label>
+    <input type="text" id="descripcion" th:field="*{descripcion}"><br>
+    <label for="nivel">Nivel:</label>
+    <input type="text" id="nivel" th:field="*{nivel}"><br>
+    <label for="duracion">Duración:</label>
+    <input type="number" id="duracion" th:field="*{duracion}"><br>
+    <label for="horario">Horario:</label>
+    <input type="text" id="horario" th:field="*{horario}"><br>
+    <label for="idProfesor">Profesor:</label>
+    <select id="idProfesor" th:field="*{idProfesor}">
+        <option th:each="profesor : ${profesores}" th:value="${profesor.idProfesor}" th:text="${profesor.nombre}"></option>
+    </select><br>
+    <button type="submit">Guardar</button>
+</form>
+<a th:href="@{/}">Cancelar</a><br><br>
 </body>
 </html>

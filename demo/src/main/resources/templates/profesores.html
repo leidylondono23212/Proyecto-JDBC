@@ -7,9 +7,10 @@
 <body>
 <h1>Profesores</h1>
 <a th:href="@{/profesores/nuevo}">Nuevo Profesor</a>
+<a th:href="@{/}">Volver</a>
 <table border="1">
     <tr>
-        <th>ID</th>
+        <th style="display: none;">ID</th>
         <th>Nombre</th>
         <th>Apellido</th>
         <th>Especialidad</th>
@@ -18,7 +19,7 @@
         <th>Acciones</th>
     </tr>
     <tr th:each="profesor : ${profesores}">
-        <td th:text="${profesor.idProfesor}"></td>
+        <td style="display: none;" th:text="${profesor.idProfesor}"></td>
         <td th:text="${profesor.nombre}"></td>
         <td th:text="${profesor.apellido}"></td>
         <td th:text="${profesor.especialidad}"></td>

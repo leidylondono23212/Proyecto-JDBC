@@ -7,11 +7,12 @@
 <body>
 <h1>Estudiantes</h1>
 <a th:href="@{/estudiantes/nuevo}">Nuevo Estudiante</a>
+<a th:href="@{/}">Volver</a>
 <br>
 <br>
 <table border="1">
     <tr>
-        <th>ID</th>
+        <th style="display: none;">ID</th>
         <th>Nombre</th>
         <th>Apellido</th>
         <th>Correo Electrónico</th>
@@ -21,7 +22,7 @@
         <th>Eliminar</th>
     </tr>
     <tr th:each="estudiante : ${estudiantes}">
-        <td th:text="${estudiante.idEstudiante}"></td>
+        <td style="display: none;" th:text="${estudiante.idEstudiante}"></td>
         <td th:text="${estudiante.nombre}"></td>
         <td th:text="${estudiante.apellido}"></td>
         <td th:text="${estudiante.correoElectronico}"></td>

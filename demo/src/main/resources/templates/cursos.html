@@ -6,10 +6,11 @@
 </head>
 <body>
 <h1>Cursos</h1>
-<a th:href="@{/cursos/nuevo}">Nuevo Curso</a>
+<a th:href="@{/profesores/nuevo}">Nuevo Curso</a>
+<a th:href="@{/}">Volver</a>
 <table border="1">
     <tr>
-        <th>ID</th>
+        <th style="display: none;">ID</th>
         <th>Nombre Curso</th>
         <th>Descripción</th>
         <th>Nivel</th>
@@ -19,7 +20,7 @@
         <th>Acciones</th>
     </tr>
     <tr th:each="curso : ${cursos}">
-        <td th:text="${curso.idCurso}"></td>
+        <td style="display: none;" th:text="${curso.idCurso}"></td>
         <td th:text="${curso.nombreCurso}"></td>
         <td th:text="${curso.descripcion}"></td>
         <td th:text="${curso.nivel}"></td>
@@ -30,6 +31,7 @@
             <a th:href="@{|/cursos/editar/${curso.idCurso}|}">Editar</a>
             <a th:href="@{|/cursos/eliminar/${curso.idCurso}|}">Eliminar</a>
         </td>
+
     </tr>
 </table>
 </body>

@@ -1,12 +1,17 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Curso;
+import com.example.demo.model.Profesor;
 import com.example.demo.repository.CursoRepository;
 import com.example.demo.repository.ProfesorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Controller
 @RequestMapping("/cursos")
@@ -20,7 +25,14 @@ public class CursoController {
 
     @GetMapping
     public String listarCursos(Model model) {
-        model.addAttribute("cursos", cursoRepository.findAll());
+
+        List<Curso> cursos = StreamSupport.stream(cursoRepository.findAll().spliterator(), false)
+                .collect(Collectors.toList());
+        for (Curso curso : cursos) {
+            Profesor profesor = profesorRepository.findById(curso.getIdProfesor()).orElse(null);
+            curso.setProfesor(profesor);
+        }
+        model.addAttribute("cursos", cursos);
         return "cursos";
     }
 

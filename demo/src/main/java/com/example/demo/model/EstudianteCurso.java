@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Data
@@ -11,4 +12,9 @@ public class EstudianteCurso {
     private Integer idEstudianteCurso;
     private Integer idEstudiante;
     private Integer idCurso;
+
+    @Transient
+    private Estudiante estudiante;
+    @Transient
+    private Curso curso;
 }

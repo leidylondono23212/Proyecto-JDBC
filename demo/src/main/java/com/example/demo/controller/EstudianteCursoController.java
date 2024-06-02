@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Curso;
+import com.example.demo.model.Estudiante;
 import com.example.demo.model.EstudianteCurso;
 import com.example.demo.repository.CursoRepository;
 import com.example.demo.repository.EstudianteCursoRepository;
@@ -8,6 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Controller
 @RequestMapping("/estudiantes_cursos")
@@ -24,7 +30,17 @@ public class EstudianteCursoController {
 
     @GetMapping
     public String listarEstudiantesCursos(Model model) {
-        model.addAttribute("estudiantesCursos", estudianteCursoRepository.findAll());
+
+        List<EstudianteCurso> estudianteCurso = StreamSupport.stream(estudianteCursoRepository.findAll().spliterator(), false)
+                        .collect(Collectors.toList());
+        for (EstudianteCurso estCur: estudianteCurso){
+            Estudiante estudiante = estudianteRepository.findById(estCur.getIdEstudiante()).orElse(null);
+            estCur.setEstudiante(estudiante);
+            Curso curso = cursoRepository.findById(estCur.getIdCurso()).orElse(null);
+            estCur.setCurso(curso);
+        }
+
+        model.addAttribute("estudiantesCursos", estudianteCurso);
         return "estudiantesCursos";
     }
 

@@ -1,12 +1,17 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Especializacion;
+import com.example.demo.model.Profesor;
 import com.example.demo.repository.EspecializacionRepository;
 import com.example.demo.repository.ProfesorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Controller
 @RequestMapping("/especializaciones")
@@ -20,7 +25,15 @@ public class EspecializacionController {
 
     @GetMapping
     public String listarEspecializaciones(Model model) {
-        model.addAttribute("especializaciones", especializacionRepository.findAll());
+
+        List<Especializacion> especializacion = StreamSupport.stream(especializacionRepository.findAll().spliterator(), false)
+                .collect(Collectors.toList());
+        for (Especializacion esp: especializacion){
+            Profesor profesor = profesorRepository.findById(esp.getIdProfesor()).orElse(null);
+            esp.setProfesor(profesor);
+        }
+
+        model.addAttribute("especializaciones", especializacion);
         return "especializaciones";
     }
 

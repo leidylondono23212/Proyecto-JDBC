@@ -7,18 +7,19 @@
 <body>
 <h1>Estudiantes en Cursos</h1>
 <a th:href="@{/estudiantes_cursos/nuevo}">Nuevo Registro</a>
+<a th:href="@{/}">Volver</a>
 <table border="1">
     <tr>
-        <th>ID Estudiante</th>
+        <th style="display: none;">ID Estudiante</th>
         <th>Nombre Estudiante</th>
-        <th>ID Curso</th>
+        <th style="display: none;">ID Curso</th>
         <th>Nombre Curso</th>
         <th>Acciones</th>
     </tr>
     <tr th:each="estudianteCurso : ${estudiantesCursos}">
-        <td th:text="${estudianteCurso.idEstudiante}"></td>
+        <td style="display: none;" th:text="${estudianteCurso.idEstudiante}"></td>
         <td th:text="${estudianteCurso.estudiante != null ? estudianteCurso.estudiante.nombre : 'Desconocido'}"></td>
-        <td th:text="${estudianteCurso.idCurso}"></td>
+        <td style="display: none;" th:text="${estudianteCurso.idCurso}"></td>
         <td th:text="${estudianteCurso.curso != null ? estudianteCurso.curso.nombreCurso : 'Desconocido'}"></td>
         <td>
             <a th:href="@{|/estudiantes_cursos/editar/${estudianteCurso.idEstudianteCurso}|}">Editar</a>

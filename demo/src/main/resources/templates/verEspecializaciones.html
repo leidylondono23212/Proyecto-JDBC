@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Especializaciones</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+<h1>Especializaciones</h1>
+<a th:href="@{/especializaciones}">Volver</a>
+<table border="1">
+    <tr>
+        <th style="display: none;">ID</th>
+        <th>Nombre Especialización</th>
+        <th>Nivel</th>
+        <th>Institución</th>
+        <th>Acciones</th>
+    </tr>
+    <tr th:each="especializacion : ${especializaciones}">
+        <td style="display: none;" th:text="${especializacion.idEspecializacion}"></td>
+        <td th:text="${especializacion.nombreEspecializacion}"></td>
+        <td th:text="${especializacion.nivelEspecializacion}"></td>
+        <td th:text="${especializacion.institucion}"></td>
+        <td>
+            <a th:href="@{|/especializaciones/eliminar/${especializacion.idEspecializacion}/${especializacion.idProfesor}|}">Eliminar</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

@@ -25,23 +25,24 @@ public class EspecializacionController {
 
     @GetMapping
     public String listarEspecializaciones(Model model) {
-
-        List<Especializacion> especializacion = StreamSupport.stream(especializacionRepository.findAll().spliterator(), false)
-                .collect(Collectors.toList());
-        for (Especializacion esp: especializacion){
-            Profesor profesor = profesorRepository.findById(esp.getIdProfesor()).orElse(null);
-            esp.setProfesor(profesor);
-        }
-
-        model.addAttribute("especializaciones", especializacion);
+        model.addAttribute("profesores", profesorRepository.findAll());
         return "especializaciones";
     }
 
-    @GetMapping("/nuevo")
-    public String nuevaEspecializacion(Model model) {
-        model.addAttribute("especializacion", new Especializacion());
-        model.addAttribute("profesores", profesorRepository.findAll());
+    @GetMapping("/nuevo/{id}")
+    public String nuevaEspecializacion(@PathVariable Integer id, Model model) {
+        Especializacion especializacion =  new Especializacion();
+        especializacion.setIdProfesor(id);
+        model.addAttribute("especializacion", especializacion);
         return "formularioEspecializacion";
+    }
+
+
+    @GetMapping("/ver/{id}")
+    public String verEspecializacion(@PathVariable Integer id, Model model) {
+        Iterable<Especializacion> especializacion = especializacionRepository.findByProfesor(id);
+        model.addAttribute("especializaciones", especializacion);
+        return "verEspecializaciones";
     }
 
     @PostMapping
@@ -65,9 +66,9 @@ public class EspecializacionController {
         return "redirect:/especializaciones";
     }
 
-    @GetMapping("/eliminar/{id}")
-    public String eliminarEspecializacion(@PathVariable Integer id) {
+    @GetMapping("/eliminar/{id}/{idProfesor}")
+    public String eliminarEspecializacion(@PathVariable Integer id, @PathVariable Integer idProfesor) {
         especializacionRepository.deleteById(id);
-        return "redirect:/especializaciones";
+        return "redirect:/especializaciones/ver/" + idProfesor;
     }
 }

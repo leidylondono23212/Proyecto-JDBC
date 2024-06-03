@@ -17,7 +17,7 @@ CREATE TABLE Cursos (
     Duracion INT NOT NULL,
     Horario VARCHAR(50) NOT NULL,
     ID_Profesor INT NOT NULL,
-    FOREIGN KEY (ID_Profesor) REFERENCES Profesores(ID_Profesor)
+    FOREIGN KEY (ID_Profesor) REFERENCES Profesores(ID_Profesor) ON DELETE CASCADE
 );
 
 -- Tabla Estudiantes (D)
@@ -35,8 +35,8 @@ CREATE TABLE Estudiantes_Cursos (
     ID_Estudiante INT NOT NULL,
     ID_Curso INT NOT NULL,
     PRIMARY KEY (ID_Estudiante, ID_Curso),
-    FOREIGN KEY (ID_Estudiante) REFERENCES Estudiantes(ID_Estudiante),
-    FOREIGN KEY (ID_Curso) REFERENCES Cursos(ID_Curso)
+    FOREIGN KEY (ID_Estudiante) REFERENCES Estudiantes(ID_Estudiante) ON DELETE CASCADE,
+    FOREIGN KEY (ID_Curso) REFERENCES Cursos(ID_Curso) ON DELETE CASCADE
 );
 
 -- Tabla Especializaciones (C)
@@ -46,7 +46,7 @@ CREATE TABLE Especializaciones (
     Nombre_Especializacion VARCHAR(100) NOT NULL,
     Nivel_Especializacion VARCHAR(50) NOT NULL,
     Institucion VARCHAR(100) NOT NULL,
-    FOREIGN KEY (ID_Profesor) REFERENCES Profesores(ID_Profesor)
+    FOREIGN KEY (ID_Profesor) REFERENCES Profesores(ID_Profesor) ON DELETE ON CASCADE
 );
 
 

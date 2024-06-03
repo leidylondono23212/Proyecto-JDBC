@@ -17,6 +17,7 @@
         <th>Certificaciones</th>
         <th>Correo Electrónico</th>
         <th>Acciones</th>
+        <th>Curso</th>
     </tr>
     <tr th:each="profesor : ${profesores}">
         <td style="display: none;" th:text="${profesor.idProfesor}"></td>
@@ -29,7 +30,11 @@
             <a th:href="@{|/profesores/editar/${profesor.idProfesor}|}">Editar</a>
             <a th:href="@{|/profesores/eliminar/${profesor.idProfesor}|}">Eliminar</a>
         </td>
+        <td>
+            <a th:href="@{|/cursos/editar/${profesor.idProfesor}|}">Curso</a>
+        </td>
     </tr>
 </table>
+<a th:href="@{/especializaciones}">Especializaciones</a>
 </body>
 </html>

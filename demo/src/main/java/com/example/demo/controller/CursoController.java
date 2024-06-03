@@ -53,7 +53,6 @@ public class CursoController {
     public String editarCurso(@PathVariable Integer id, Model model) {
         Curso curso = cursoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("ID inválido:" + id));
         model.addAttribute("curso", curso);
-        model.addAttribute("profesores", profesorRepository.findAll());
         return "formularioCurso";
     }
 

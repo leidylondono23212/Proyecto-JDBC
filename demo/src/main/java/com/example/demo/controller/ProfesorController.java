@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Curso;
 import com.example.demo.model.Profesor;
+import com.example.demo.repository.CursoRepository;
 import com.example.demo.repository.ProfesorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,8 @@ public class ProfesorController {
 
     @Autowired
     private ProfesorRepository profesorRepository;
+    @Autowired
+    private CursoRepository cursoRepository;
 
     @GetMapping
     public String listarProfesores(Model model) {
@@ -23,15 +26,15 @@ public class ProfesorController {
 
     @GetMapping("/nuevo")
     public String nuevoProfesor(Model model) {
-        model.addAttribute("profesor", new Profesor());
         model.addAttribute("curso", new Curso());
-        model.addAttribute("profesores", profesorRepository.findAll());
         return "formularioProfesor";
     }
 
     @PostMapping
-    public String guardarProfesor(@ModelAttribute Profesor profesor) {
-        profesorRepository.save(profesor);
+    public String guardarProfesor(@ModelAttribute Curso curso) {
+        Profesor savedProfesor = profesorRepository.save(curso.getProfesor());
+        curso.setIdProfesor(savedProfesor.getIdProfesor());
+        cursoRepository.save(curso);
         return "redirect:/profesores";
     }
 

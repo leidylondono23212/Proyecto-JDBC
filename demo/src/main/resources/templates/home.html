@@ -6,10 +6,10 @@
 </head>
 <body>
 <h1>Bienvenido a la Aplicación de Gestión de Cursos</h1>
-<a th:href="@{/cursos}">Ver Cursos</a>
-<a th:href="@{/especializaciones}">Ver Especializaciones</a>
-<a th:href="@{/estudiantes}">Ver Estudiantes</a>
-<a th:href="@{/profesores}">Ver Profesores</a>
-<a th:href="@{/estudiantes_cursos}">Ver Estudiantes en Cursos</a>
+<div class="button-container">
+    <a th:href="@{/profesores/nuevo}" class="button-link">Home</a>
+    <a th:href="@{/profesores}" class="button-link">Profesores</a>
+    <a th:href="@{/estudiantes/nuevo}" class="button-link">Estudiantes</a>
+</div>
 </body>
 </html>

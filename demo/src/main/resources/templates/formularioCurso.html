@@ -19,6 +19,26 @@
     <label for="horario">Horario:</label>
     <input type="text" id="horario" th:field="*{horario}" readonly><br>
 </form>
+
+<table border="1">
+    <tr>
+        <th style="display: none;">ID</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Correo Electrónico</th>
+        <th>Teléfono</th>
+        <th>Dirección</th>
+    </tr>
+    <tr th:each="estudiante : ${estudiantes}">
+        <td style="display: none;" th:text="${estudiante.idEstudiante}"></td>
+        <td th:text="${estudiante.nombre}"></td>
+        <td th:text="${estudiante.apellido}"></td>
+        <td th:text="${estudiante.correoElectronico}"></td>
+        <td th:text="${estudiante.telefono}"></td>
+        <td th:text="${estudiante.direccion}"></td>
+    </tr>
+</table>
+
 <a th:href="@{/profesores}">Volver</a>
 </body>
 </html>

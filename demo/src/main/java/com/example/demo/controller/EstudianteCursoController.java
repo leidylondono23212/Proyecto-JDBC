@@ -1,11 +1,14 @@
 package com.example.demo.controller;
 
+
 import com.example.demo.model.Curso;
 import com.example.demo.model.Estudiante;
 import com.example.demo.model.EstudianteCurso;
+import com.example.demo.model.Profesor;
 import com.example.demo.repository.CursoRepository;
 import com.example.demo.repository.EstudianteCursoRepository;
 import com.example.demo.repository.EstudianteRepository;
+import com.example.demo.repository.ProfesorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +30,9 @@ public class EstudianteCursoController {
 
     @Autowired
     private CursoRepository cursoRepository;
+
+    @Autowired
+    private ProfesorRepository profesorRepository;
 
     @GetMapping
     public String listarEstudiantesCursos(Model model) {
@@ -55,7 +61,7 @@ public class EstudianteCursoController {
     @PostMapping
     public String guardarEstudianteCurso(@ModelAttribute EstudianteCurso estudianteCurso) {
         estudianteCursoRepository.save(estudianteCurso);
-        return "redirect:/estudiantes_cursos";
+        return "redirect:/estudiantes";
     }
 
     @GetMapping("/editar/{id}")
@@ -78,5 +84,18 @@ public class EstudianteCursoController {
     public String eliminarEstudianteCurso(@PathVariable Integer id) {
         estudianteCursoRepository.deleteById(id);
         return "redirect:/estudiantes_cursos";
+    }
+
+    @GetMapping("/ver_cursos/{id}")
+    public String listarCursosEstudiantes(@PathVariable Integer id, Model model) {
+
+        List<Curso> cursos = StreamSupport.stream(cursoRepository.findByEstudiante(id).spliterator(), false)
+                .collect(Collectors.toList());
+        for (Curso curso : cursos) {
+            Profesor profesor = profesorRepository.findById(curso.getIdProfesor()).orElse(null);
+            curso.setProfesor(profesor);
+        }
+        model.addAttribute("cursos", cursos);
+        return "verCuros";
     }
 }

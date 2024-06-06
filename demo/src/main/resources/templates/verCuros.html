@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cursos</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+<h1>Cursos</h1>
+<a th:href="@{/profesores/nuevo}">Nuevo Curso</a>
+<a th:href="@{/}">Volver</a>
+<table border="1">
+    <tr>
+        <th style="display: none;">ID</th>
+        <th>Nombre Curso</th>
+        <th>Descripción</th>
+        <th>Nivel</th>
+        <th>Duración</th>
+        <th>Horario</th>
+        <th>Profesor</th>
+        <th>Acciones</th>
+    </tr>
+    <tr th:each="curso : ${cursos}">
+        <td style="display: none;" th:text="${curso.idCurso}"></td>
+        <td th:text="${curso.nombreCurso}"></td>
+        <td th:text="${curso.descripcion}"></td>
+        <td th:text="${curso.nivel}"></td>
+        <td th:text="${curso.duracion}"></td>
+        <td th:text="${curso.horario}"></td>
+        <td th:text="${curso.profesor != null ? curso.profesor.nombre : 'Sin profesor'}"></td>
+        <td>
+            <a th:href="@{|/cursos/editar/${curso.idCurso}|}">Editar</a>
+            <a th:href="@{|/cursos/eliminar/${curso.idCurso}|}">Eliminar</a>
+        </td>
+
+    </tr>
+</table>
+</body>
+</html>

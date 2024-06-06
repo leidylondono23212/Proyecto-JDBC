@@ -13,6 +13,6 @@ public interface EspecializacionRepository extends CrudRepository<Especializacio
 
 
     @Query("SELECT * FROM especializaciones WHERE ID_Profesor = :id")
-    Set<Especializacion> findByProfesor(@Param("id") Integer id);
+        Set<Especializacion> findByProfesor(@Param("id") Integer id);
 
 }

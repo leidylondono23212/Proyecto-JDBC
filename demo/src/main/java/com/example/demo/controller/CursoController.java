@@ -1,8 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Curso;
+import com.example.demo.model.Especializacion;
+import com.example.demo.model.Estudiante;
 import com.example.demo.model.Profesor;
 import com.example.demo.repository.CursoRepository;
+import com.example.demo.repository.EstudianteRepository;
 import com.example.demo.repository.ProfesorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +25,9 @@ public class CursoController {
 
     @Autowired
     private ProfesorRepository profesorRepository;
+
+    @Autowired
+    private EstudianteRepository estudianteRepository;
 
     @GetMapping
     public String listarCursos(Model model) {
@@ -52,7 +58,9 @@ public class CursoController {
     @GetMapping("/editar/{id}")
     public String editarCurso(@PathVariable Integer id, Model model) {
         Curso curso = cursoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("ID inválido:" + id));
+        Iterable<Estudiante> estudiantes = estudianteRepository.findByCurso(id);
         model.addAttribute("curso", curso);
+        model.addAttribute("estudiantes", estudiantes);
         return "formularioCurso";
     }
 

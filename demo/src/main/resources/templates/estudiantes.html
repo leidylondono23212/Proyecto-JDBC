@@ -6,8 +6,8 @@
 </head>
 <body>
 <h1>Estudiantes</h1>
-<a th:href="@{/estudiantes/nuevo}">Nuevo Estudiante</a>
-<a th:href="@{/}">Volver</a>
+<a th:href="@{/estudiantes/nuevo}" class="button-link">Nuevo Estudiante</a>
+<a th:href="@{/}" class="button-link">Volver</a>
 <br>
 <br>
 <table border="1">
@@ -18,9 +18,8 @@
         <th>Correo Electrónico</th>
         <th>Teléfono</th>
         <th>Dirección</th>
+        <th>Acciones</th>
         <th>Cursos</th>
-        <th>Editar</th>
-        <th>Eliminar</th>
     </tr>
     <tr th:each="estudiante : ${estudiantes}">
         <td style="display: none;" th:text="${estudiante.idEstudiante}"></td>
@@ -30,13 +29,11 @@
         <td th:text="${estudiante.telefono}"></td>
         <td th:text="${estudiante.direccion}"></td>
         <td>
-            <a th:href="@{|/estudiantes_cursos/ver_cursos/${estudiante.idEstudiante}|}">Cursos</a>
-        </td>
-        <td>
             <a th:href="@{|/estudiantes/editar/${estudiante.idEstudiante}|}">Editar</a>
+            <a th:href="@{|/estudiantes/eliminar/${estudiante.idEstudiante}|}">Eliminar</a>
         </td>
         <td>
-            <a th:href="@{|/estudiantes/eliminar/${estudiante.idEstudiante}|}">Eliminar</a>
+            <a th:href="@{|/estudiantes_cursos/ver_cursos/${estudiante.idEstudiante}|}">Cursos</a>
         </td>
     </tr>
 </table>
